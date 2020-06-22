@@ -36,7 +36,7 @@ def test_phase(opt,net,testloader,log_save_path=None):
         for j, data in enumerate(testloader):
             inputs , labels = data['image'], data['target']
             inputs,labels = inputs.type(torch.float32),labels.unsqueeze(1).type(torch.float32)
-            inputs, labels = inputs.cuda(), labels.cuda()
+            #inputs, labels = inputs.cuda(), labels.cuda()
             
 
             features = net(inputs)

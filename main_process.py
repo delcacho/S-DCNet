@@ -61,14 +61,14 @@ def main(opt):
     class_num = len(label_indice)+1
     div_times = 2
     net = SDCNet_VGG16_classify(class_num,label_indice,psize=opt['psize'],\
-        pstride = opt['pstride'],div_times=div_times,load_weights=True).cuda()
+        pstride = opt['pstride'],div_times=div_times,load_weights=True)#.cuda()
 
     # test the exist trained model
     mod_path='best_epoch.pth' 
     mod_path=os.path.join(opt['trained_model_path'],mod_path)
 
     if os.path.exists(mod_path):
-        all_state_dict = torch.load(mod_path)
+        all_state_dict = torch.load(mod_path,map_location=torch.device('cpu'))
         net.load_state_dict(all_state_dict['net_state_dict'])
         log_save_path = os.path.join(opt['trained_model_path'],'log-trained-model.txt')
         # test
